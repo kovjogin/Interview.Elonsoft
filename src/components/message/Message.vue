@@ -1,6 +1,6 @@
 <template>
   <div>
-    <md-list-item>
+    <md-list-item :class="{'md-active': currentMsg.id === value.id }">
       <md-avatar class="md-avatar-icon">
         <md-icon>person</md-icon>
       </md-avatar>
@@ -21,20 +21,27 @@
             <md-icon>edit</md-icon>
           </md-menu-item>
 
-          <md-menu-item @click="removeMessage(value)">
+          <md-menu-item @click="isModalShow = true">
             <span>Delete</span>
             <md-icon>delete</md-icon>
           </md-menu-item>
         </md-menu-content>
       </md-menu>
     </md-list-item>
-  </div>
 
+
+    <md-dialog-confirm
+            :md-active.sync="isModalShow"
+            md-content="Вы действительно хотите удалить сообщение?"
+            md-confirm-text="Да"
+            md-cancel-text="Отмена"
+            @md-confirm="onConfirm" />
+  </div>
 </template>
 <script>
   import {TMP_MESSAGE} from '@/store/const';
   import {Message} from '@/models/message';
-  import {mapActions} from 'vuex';
+  import {mapActions, mapGetters} from 'vuex';
 
   export default {
     name: 'MessagesList',
@@ -45,11 +52,31 @@
       }
     },
 
+    data: () => ({
+      isModalShow: false
+    }),
+
+    computed: {
+      ...mapGetters({
+        'currentMsg': TMP_MESSAGE
+      })
+    },
+
     methods: {
       ...mapActions({
         'removeMessage': 'removeMessage',
         'setMessage': TMP_MESSAGE
-      })
+      }),
+
+      onConfirm() {
+        this.removeMessage(this.value);
+      }
     }
   };
 </script>
+
+<style lang="scss" scoped>
+  .md-active {
+    background: #eee;
+  }
+</style>

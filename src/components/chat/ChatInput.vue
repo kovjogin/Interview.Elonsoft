@@ -2,12 +2,11 @@
   <form @submit.prevent="submit">
     <md-field>
       <label>Your message</label>
-      <md-input v-model.trim="tmp_message.text" @input="update"></md-input>
+      <md-input :value="tmp_message.text" @input="update"></md-input>
       <md-button class="md-icon-button md-dense md-primary" @click="submit">
         <md-icon>send</md-icon>
       </md-button>
     </md-field>
-
   </form>
 </template>
 
@@ -17,12 +16,15 @@
   import {Message} from '@/models/message';
   import {mapActions, mapGetters} from 'vuex';
   import {TMP_MESSAGE} from '@/store/const';
+  import debounce from 'underscore-es/debounce';
 
   export default {
     name: 'ChatInput',
     mixins: [validationMixin],
     validations: {
-      tmp_message: {required}
+      tmp_message: {
+        text: {required}
+      }
     },
     computed: {
       ...mapGetters({
@@ -36,9 +38,9 @@
         'setMessage': TMP_MESSAGE
       }),
 
-      update: function (text) {
-        this.setMessage({text});
-      },
+      update: debounce(function (text) {
+        this.setMessage({text: text.trim()});
+      }, 300),
 
       submit: function () {
         if (!this.$v.$invalid) {

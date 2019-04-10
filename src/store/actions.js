@@ -22,7 +22,7 @@ const actions = {
     if (~index) {
       messages[index] = msg;
     } else {
-      messages = [...messages, {...msg, user: getters[CURRENT_USER]}];
+      messages.push({...msg, user: getters[CURRENT_USER]});
     }
 
     commit(MESSAGES, messages);

@@ -2,7 +2,9 @@
   <div class="page-error">
     <h1>404</h1>
     <p>
-      <router-link :to="{name: 'chat'}">На главную</router-link>
+      <router-link :to="{name: 'chat'}">
+На главную
+</router-link>
     </p>
   </div>
 </template>

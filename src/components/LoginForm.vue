@@ -2,7 +2,9 @@
   <md-card class="card-login">
     <form @submit.prevent="submit">
       <md-card-header>
-        <div class="md-title"> Login</div>
+        <div class="md-title">
+Login
+</div>
       </md-card-header>
 
       <md-card-content>
@@ -15,11 +17,12 @@
             </md-field>
           </div>
         </div>
-
-      </md-card-content>
+</md-card-content>
 
       <md-card-actions>
-        <md-button class="md-raised md-primary" type="submit">Login</md-button>
+        <md-button class="md-raised md-primary" type="submit">
+Login
+</md-button>
       </md-card-actions>
     </form>
   </md-card>

@@ -1,6 +1,5 @@
 <template>
-
-  <div>
+<div>
     <md-list class="md-triple-line">
       <Message
               v-for="(msg, index) in messages"

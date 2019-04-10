@@ -9,7 +9,10 @@ import {
   MdList,
   MdAvatar,
   MdDivider,
-  MdMenu
+  MdMenu,
+  MdDialog,
+  MdDialogConfirm
+
 } from 'vue-material/dist/components';
 import 'vue-material/dist/vue-material.min.css';
 import 'vue-material/dist/theme/default.css';
@@ -24,3 +27,5 @@ Vue.use(MdList);
 Vue.use(MdAvatar);
 Vue.use(MdDivider);
 Vue.use(MdMenu);
+Vue.use(MdDialog);
+Vue.use(MdDialogConfirm);
